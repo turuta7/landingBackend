@@ -5,10 +5,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 
-// import slider from './router/slider.js';
 import { sliders, user } from './router/index.js';
-
-// import tasks from '../../router/tasks.js'
 
 const app = express();
 
@@ -23,8 +20,6 @@ app.use(user);
 app.use('/', (req, res) => {
   res.send({ message: 'Error endpoint!' });
 });
-// app.use(slider);
-// app.use(tasks);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -2,10 +2,9 @@ import express from 'express';
 
 import controller from '../controllers/slider.js';
 
-import authMiddleware from '../middelware/auth.js';
+import authMiddleware from '../middleware/auth.js';
 
 const router = express.Router();
-// import {validationEmail} from "../utils/checkingMail.js";
 
 router.get('/slider', authMiddleware, controller.getAll);
 router.post('/slider', authMiddleware, controller.create);

@@ -1,16 +1,16 @@
 import express from 'express';
 import auth from '../controllers/auth.js';
+import authMiddleware from '../middleware/auth.js';
 
 import controller from '../controllers/user.js';
-import validationEmail from '../middelware/checkingMail.js';
+import validationEmail from '../middleware/checkingMail.js';
 
 const router = express.Router();
-// import {validationEmail} from "../utils/checkingMail.js";
 
-router.get('/user', controller.getAllUser);
+router.get('/user', authMiddleware, controller.getAllUser);
 router.post('/user', validationEmail, controller.createUser);
-router.put('/user/:id', controller.updateUser);
-router.delete('/user/:id', controller.removeUser);
+router.put('/user/:id', authMiddleware, controller.updateUser);
+router.delete('/user/:id', authMiddleware, controller.removeUser);
 
 router.post('/signin', auth.singIn);
 
