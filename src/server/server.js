@@ -4,11 +4,10 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
-import dotenv from 'dotenv';
 
-dotenv.config();
+// import slider from './router/slider.js';
+import { sliders, user } from './router/index.js';
 
-import slider from '../server/router/slider.js'
 // import tasks from '../../router/tasks.js'
 
 const app = express();
@@ -19,7 +18,12 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
 
-app.use(slider);
+app.use(sliders);
+app.use(user);
+app.use('/', (req, res) => {
+  res.send({ message: 'Error endpoint!' });
+});
+// app.use(slider);
 // app.use(tasks);
 
 // catch 404 and forward to error handler

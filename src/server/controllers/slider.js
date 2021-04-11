@@ -10,19 +10,19 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
   const {
-    title, url
+    title, url,
   } = req.body;
   try {
     res.send(await Slider.create({
       title,
-      url
+      url,
     }));
   } catch (err) {
     res.send(err.message || err);
   }
 };
 
-const deleteSliderUrl = async (req, res) => {
+const remove = async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
@@ -34,6 +34,18 @@ const deleteSliderUrl = async (req, res) => {
   }
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    res.send(await Slider.updateOne({
+      _id: id,
+    }, req.body));
+  } catch (err) {
+    res.send(err.message || err);
+  }
+};
+
 export default {
-  create, getAll, deleteSliderUrl,
+  create, getAll, remove, update,
 };
