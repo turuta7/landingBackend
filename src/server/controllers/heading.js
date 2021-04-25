@@ -1,11 +1,19 @@
-import Slider from '../models/slider.js';
+import Heading from '../models/heading.js';
+
+const getAll = async (req, res) => {
+  try {
+    res.send(await Heading.find());
+  } catch (err) {
+    res.send(err.message || err);
+  }
+};
 
 const getOne = async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
     res.send(
-      await Slider.findOne({
+      await Heading.findOne({
         _id: id,
       }),
     );
@@ -14,21 +22,14 @@ const getOne = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
-  try {
-    res.send(await Slider.find());
-  } catch (err) {
-    res.send(err.message || err);
-  }
-};
-
 const create = async (req, res) => {
-  const { title, url } = req.body;
+  const { textRu, textEn, textUa } = req.body;
   try {
     res.send(
-      await Slider.create({
-        title,
-        url,
+      await Heading.create({
+        textRu,
+        textEn,
+        textUa,
       }),
     );
   } catch (err) {
@@ -41,7 +42,7 @@ const remove = async (req, res) => {
   console.log('id', id);
   try {
     res.send(
-      await Slider.deleteOne({
+      await Heading.deleteOne({
         _id: id,
       }),
     );
@@ -55,7 +56,7 @@ const update = async (req, res) => {
   console.log(id);
   try {
     res.send(
-      await Slider.updateOne(
+      await Heading.updateOne(
         {
           _id: id,
         },

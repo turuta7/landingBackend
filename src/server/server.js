@@ -5,7 +5,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
 
-import { sliders, user } from './router/index.js';
+import {
+  sliders, user, heading, section,
+} from './router/index.js';
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(cookieParser());
 
 app.use(sliders);
 app.use(user);
+app.use(heading);
+app.use(section);
 app.use('/', (req, res) => {
   res.send({ message: 'Error endpoint!' });
 });

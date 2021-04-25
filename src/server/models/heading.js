@@ -2,19 +2,20 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const Slider = new Schema(
+const Heading = new Schema(
   {
-    title: {
+    textRu: {
       type: String,
       required: true,
     },
-    url: {
+    textEn: {
       type: String,
-      required: true,
-      unique: true,
+    },
+    textUa: {
+      type: String,
     },
   },
   { timestamps: true },
 );
 
-export default mongoose.model('Slider', Slider);
+export default mongoose.model('Heading', Heading);
