@@ -23,13 +23,11 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { name, SEO.title } = req.body;
+  const { name } = req.body;
   try {
     res.send(
       await Category.create({
         name,
-        SEO.title,
-        },
       }),
     );
   } catch (err) {
