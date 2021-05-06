@@ -16,12 +16,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
+// app.use(multer({ storage: storageConfig }).single('avatar'));
 
 app.use(sliders);
 app.use(user);
 app.use(heading);
 app.use(section);
 app.use(category);
+
+// const upload = multer({   });
+// app.post('/fileUpload', upload.single('image'), (req, res, next) => {
+//   console.log(req.file);
+// });
+
 app.use('/', (req, res) => {
   res.send({ message: 'Error endpoint!' });
 });

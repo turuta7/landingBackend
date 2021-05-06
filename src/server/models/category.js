@@ -20,8 +20,8 @@ const Category = new Schema(
       description: {
         type: String,
       },
-      //   photo: {},
     },
+    img: { data: Buffer, contentType: String },
   },
   { timestamps: true },
 );

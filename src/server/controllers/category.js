@@ -23,16 +23,24 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { name } = req.body;
-  try {
-    res.send(
-      await Category.create({
-        name,
-      }),
-    );
-  } catch (err) {
-    res.send(err.message || err);
-  }
+  console.log('fff');
+  console.log('fff', req.file);
+  console.log(req.body);
+  // console.log(req.body.SEO);
+  // const { name } = req.body;
+  // const { title } = req.body.SEO;
+  // console.log(name, title);
+  // try {
+  //   res.send(
+  //     await Category.create({
+  //       name,
+  //       title,
+  //       img: req.file.buffer,
+  //     }),
+  //   );
+  // } catch (err) {
+  //   res.send(err.message || err);
+  // }
 };
 
 const remove = async (req, res) => {
