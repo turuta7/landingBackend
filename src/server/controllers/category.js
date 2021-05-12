@@ -2,7 +2,11 @@ import Category from '../models/category.js';
 
 const getAll = async (req, res) => {
   try {
-    res.send(await Category.find());
+    const ress = await (await Category.find({}, { img: 1, _id: 0 }))[2];
+    console.log(ress);
+    res.send(ress);
+
+    // res.send(await Category.find());
   } catch (err) {
     res.send(err.message || err);
   }
@@ -24,23 +28,23 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   console.log('fff');
-  console.log('fff', req.file);
-  console.log(req.body);
-  // console.log(req.body.SEO);
-  // const { name } = req.body;
-  // const { title } = req.body.SEO;
-  // console.log(name, title);
-  // try {
-  //   res.send(
-  //     await Category.create({
-  //       name,
-  //       title,
-  //       img: req.file.buffer,
-  //     }),
-  //   );
-  // } catch (err) {
-  //   res.send(err.message || err);
-  // }
+  console.log('fff', req.file.buffer);
+  console.log(req.body.text);
+
+  const name = 'ddd299';
+  const title = req.body.text;
+  console.log(name, title);
+  try {
+    res.send(
+      await Category.create({
+        name,
+        description: title,
+        img: req.file.buffer,
+      }),
+    );
+  } catch (err) {
+    res.send(err.message || err);
+  }
 };
 
 const remove = async (req, res) => {
@@ -59,14 +63,18 @@ const remove = async (req, res) => {
 
 const update = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  console.log(id, 'body', req.body);
+  // console.log(await Category.find({ _id: id }));
   try {
     res.send(
       await Category.updateOne(
         {
           _id: id,
         },
-        req.body,
+        {
+          img: req.file.buffer,
+        },
+
       ),
     );
   } catch (err) {

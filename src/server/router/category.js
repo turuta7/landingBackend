@@ -20,7 +20,7 @@ const router = express.Router();
 router.get('/category', controller.getAll);
 router.get('/category/:id', controller.getOne);
 router.post('/category', upload.single('avatar'), controller.create);
-router.put('/category/:id', controller.update);
+router.patch('/category/:id', upload.single('avatar'), controller.update);
 router.delete('/category/:id', controller.remove);
 
 export default router;

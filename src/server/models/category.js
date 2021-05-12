@@ -15,13 +15,13 @@ const Category = new Schema(
     SEO: {
       title: {
         type: String,
-        required: true,
+
       },
       description: {
         type: String,
       },
     },
-    img: { data: Buffer, contentType: String },
+    img: { type: Buffer, contentType: String, required: true },
   },
   { timestamps: true },
 );

@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
+// import fileUpload from 'express-fileupload';
 
 import {
   sliders, user, heading, section, category,
@@ -15,6 +16,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+// app.use(fileUpload());
 app.use(cookieParser());
 // app.use(multer({ storage: storageConfig }).single('avatar'));
 
