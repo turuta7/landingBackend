@@ -2,7 +2,8 @@ import Category from '../models/category.js';
 
 const getAll = async (req, res) => {
   try {
-    const ress = await (await Category.find({}, { img: 1, _id: 0 }))[2];
+    // const ress = await (await Category.find({}, { img: 1, _id: 0 }))[2];
+    const ress = await (await Category.find());
     console.log(ress);
     res.send(ress);
 
@@ -27,23 +28,36 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  console.log('fff');
-  console.log('fff', req.file.buffer);
-  console.log(req.body.text);
+  // console.log('fff');
+  // console.log('fff', req.file.buffer);
+  // console.log(req.body.text);
 
-  const name = 'ddd299';
-  const title = req.body.text;
-  console.log(name, title);
+  console.log(req.file.buffer);
+  console.log(req.body);
   try {
+    if (!req.file.buffer || !req.body) {
+      throw new Error('error buffer and data');
+    }
+    console.log('++++++++++++++++++++++++');
+    const {
+      title, name, link, SEO,
+    } = req.body;
+    console.log('ddd', SEO[0].title);
+
     res.send(
       await Category.create({
         name,
-        description: title,
+        title,
+        link,
+        SEO: {
+          description: SEO[0].description,
+          title: SEO[0].title,
+        },
         img: req.file.buffer,
       }),
     );
   } catch (err) {
-    res.send(err.message || err);
+    res.send(err.message || err || 'error');
   }
 };
 
@@ -74,7 +88,6 @@ const update = async (req, res) => {
         {
           img: req.file.buffer,
         },
-
       ),
     );
   } catch (err) {

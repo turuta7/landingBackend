@@ -11,14 +11,16 @@ const Category = new Schema(
     },
     link: {
       type: String,
+      required: true,
     },
     SEO: {
       title: {
         type: String,
-
+        required: true,
       },
       description: {
         type: String,
+        required: true,
       },
     },
     img: { type: Buffer, contentType: String, required: true },

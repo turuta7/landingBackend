@@ -2,16 +2,16 @@ import express from 'express';
 import multer from 'multer';
 import controller from '../controllers/category.js';
 
-const storageConfig = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
+// const storageConfig = multer.diskStorage({
+//   // destination: (req, file, cb) => {
+//   //   cb(null, 'uploads');
+//   // },
+//   // filename: (req, file, cb) => {
+//   //   cb(null, file.originalname);
+//   // },
+// });
 
-const upload = multer({ storageConfig });
+const upload = multer();
 
 // import authMiddleware from '../middleware/auth.js';
 
