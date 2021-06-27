@@ -2,12 +2,8 @@ import Category from '../models/category.js';
 
 const getAll = async (req, res) => {
   try {
-    // const ress = await (await Category.find({}, { img: 1, _id: 0 }))[2];
-    const ress = await (await Category.find());
-    console.log(ress);
-    res.send(ress);
-
-    // res.send(await Category.find());
+    const returnResult = await await Category.find();
+    res.send(returnResult);
   } catch (err) {
     res.send(err.message || err);
   }
@@ -28,32 +24,24 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  // console.log('fff');
-  // console.log('fff', req.file.buffer);
-  // console.log(req.body.text);
-
-  console.log(req.file.buffer);
-  console.log(req.body);
   try {
     if (!req.file.buffer || !req.body) {
       throw new Error('error buffer and data');
     }
     console.log('++++++++++++++++++++++++');
     const {
-      title, name, link, SEO,
+      title, name, link, description,
     } = req.body;
-    console.log('ddd', SEO[0].title);
 
     res.send(
       await Category.create({
         name,
-        title,
         link,
         SEO: {
-          description: SEO[0].description,
-          title: SEO[0].title,
+          description,
+          title,
         },
-        img: req.file.buffer,
+        img: req.file.buffer || undefined,
       }),
     );
   } catch (err) {
@@ -76,17 +64,34 @@ const remove = async (req, res) => {
 };
 
 const update = async (req, res) => {
+  console.log('----------------------');
   const { id } = req.params;
-  console.log(id, 'body', req.body);
-  // console.log(await Category.find({ _id: id }));
+  const {
+    title, name, link, description,
+  } = req.body;
+
   try {
+    const category = await Category.findOne({
+      _id: id,
+    });
+    let photo;
+    if (req.file) {
+      photo = req.file.buffer;
+    }
+
     res.send(
-      await Category.updateOne(
+      await Category.findByIdAndUpdate(
         {
           _id: id,
         },
         {
-          img: req.file.buffer,
+          name: name || category.name,
+          link: link || category.link,
+          SEO: {
+            description: description || category.SEO.description,
+            title: title || category.SEO.title,
+          },
+          img: photo || category.img,
         },
       ),
     );
